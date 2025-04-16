@@ -17,10 +17,10 @@ export default function Router() {
         { path: "/add", element: <AddMovie /> },
         { path: "/movie/:id", element: <MovieDetails /> },
         { path: "/explore", element: <Explore /> },
+        { path: "/profile", element: <UserProfile /> },
+        { path: "/auth", element: <Authentication /> },
       ],
     },
-    { path: "/auth", element: <Authentication /> },
-    { path: "/profile", element: <UserProfile /> },
   ]);
 
   return routes;

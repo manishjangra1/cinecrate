@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import MovieCard from "../components/MovieCard";
 
 const Explore = () => {
   const [movies, setMovies] = useState([]);
@@ -70,21 +71,22 @@ const Explore = () => {
 
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {movies.map((movie) => (
-          <Link
-            to={`/movie/${movie._id}`}
-            key={movie._id}
-            className="border rounded shadow hover:shadow-lg transition duration-300"
-          >
-            <img
-              src={movie.Poster}
-              alt={movie.Title}
-              className="h-64 w-full object-cover rounded-t"
-            />
-            <div className="p-2">
-              <h2 className="text-lg font-semibold">{movie.Title}</h2>
-              <p className="text-sm text-gray-600">{movie.Genre}</p>
-            </div>
-          </Link>
+          // <Link
+          //   to={`/movie/${movie._id}`}
+          //   key={movie._id}
+          //   className="border rounded shadow hover:shadow-lg transition duration-300"
+          // >
+          //   <img
+          //     src={movie.Poster}
+          //     alt={movie.Title}
+          //     className="h-64 w-full object-cover rounded-t"
+          //   />
+          //   <div className="p-2">
+          //     <h2 className="text-lg font-semibold">{movie.Title}</h2>
+          //     <p className="text-sm text-gray-600">{movie.Genre}</p>
+          //   </div>
+          // </Link>
+          <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
     </div>

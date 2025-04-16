@@ -6,7 +6,7 @@ import {
   getSelectedMovie,
 } from "../controllers/movieController.js";
 import { googleLogin } from "../controllers/authController.js";
-import { addReview, getReviews, likeReview } from "../controllers/reviewController.js";
+import { addReview, getReviews, getUserReviews, likeReview } from "../controllers/reviewController.js";
 
 //initialize router
 const router = express.Router();
@@ -24,5 +24,8 @@ router.get("/api/movies/:movieId", getSelectedMovie);
 router.post("/api/movies/reviews/:movieId", addReview);
 router.get("/api/movies/reviews/:movieId", getReviews);
 router.put("/api/movies/reviews/like/:reviewId", likeReview);
+
+
+router.get("/api/reviews/user/:userId", getUserReviews);
 
 export default router;

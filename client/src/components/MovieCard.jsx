@@ -4,7 +4,7 @@ function MovieCard({ movie }) {
   return (
     <Link
       to={`/movie/${movie._id}`}
-      className="bg-white shadow-md hover:shadow-lg rounded-2xl overflow-hidden border max-w-xs transition-transform hover:scale-105"
+      className="bg-[#EFEFEF] shadow-md hover:shadow-lg rounded-2xl overflow-hidden border max-w-xs transition-transform hover:scale-105"
     >
       <img
         src={movie.Poster}
@@ -17,7 +17,7 @@ function MovieCard({ movie }) {
         <p className="text-sm text-gray-500">
           Rating: <span className="font-medium">{movie.imdbRating}</span>
         </p>
-        <p className="text-xs text-gray-400 line-clamp-2">{movie.Plot}</p>
+        {/* <p className="text-xs text-gray-400 line-clamp-2">{movie.Plot}</p> */}
       </div>
     </Link>
   );

@@ -1,16 +1,28 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function AddMovie() {
   const [form, setForm] = useState({
-    title: "",
-    genre: "",
-    description: "",
-    posterUrl: "",
+    Title: "",
+    Year: "",
+    Rated: "",
+    Released: "",
+    Runtime: "",
+    Genre: "",
+    Director: "",
+    Writer: "",
+    Actors: "",
+    Plot: "",
+    Language: "",
+    Country: "",
+    Awards: "",
+    Poster: "",
+    imdbRating: "",
+    BoxOffice: "",
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -18,48 +30,153 @@ function AddMovie() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/movies`, {
-      ...form,
-      genre: form.genre.split(","),
-    });
-    toast("Movie Added Successfully");
-    navigate("/");
+
+    try {
+      const payload = {
+        ...form,
+        Genre: form.Genre.split(",").map((g) => g.trim()),
+      };
+
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/movies`,
+        payload
+      );
+      toast.success("Movie Added Successfully 🎉");
+      navigate("/");
+    } catch (err) {
+      toast.error("Failed to add movie ❌");
+      console.error(err);
+    }
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Add New Movie</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="title"
-          placeholder="Title"
-          onChange={handleChange}
-          className="w-full p-2 border"
-        />
-        <input
-          name="genre"
-          placeholder="Genre (comma-separated)"
-          onChange={handleChange}
-          className="w-full p-2 border"
-        />
-        <input
-          name="posterUrl"
-          placeholder="Poster URL"
-          onChange={handleChange}
-          className="w-full p-2 border"
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          onChange={handleChange}
-          className="w-full p-2 border"
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Submit
-        </button>
+    <div className="max-w-4xl mx-auto p-6">
+      <ToastContainer />
+      <h1 className="text-3xl font-bold mb-6">🎬 Add New Movie</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded-xl shadow"
+      >
+        {/* Left Column */}
+        <div className="space-y-4">
+          <input
+            name="Title"
+            placeholder="Title *"
+            required
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Year"
+            placeholder="Year"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Rated"
+            placeholder="Rated (e.g. PG-13)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Released"
+            placeholder="Released (e.g. 15 Oct 1999)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Runtime"
+            placeholder="Runtime (e.g. 139 min)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Genre"
+            placeholder="Genres (comma-separated)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Director"
+            placeholder="Director"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Writer"
+            placeholder="Writer(s)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-4">
+          <input
+            name="Actors"
+            placeholder="Actors"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Language"
+            placeholder="Language(s)"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Country"
+            placeholder="Country"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Awards"
+            placeholder="Awards"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="Poster"
+            placeholder="Poster URL *"
+            required
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="imdbRating"
+            placeholder="IMDb Rating"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="BoxOffice"
+            placeholder="Box Office Collection"
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Plot Field Full Width */}
+        <div className="md:col-span-2">
+          <textarea
+            name="Plot"
+            placeholder="Plot / Description"
+            rows={4}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="md:col-span-2 flex justify-end">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+          >
+            Add Movie
+          </button>
+        </div>
       </form>
     </div>
   );

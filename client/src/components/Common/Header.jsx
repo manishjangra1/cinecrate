@@ -20,9 +20,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-blue-600 text-white px-6 py-3 flex justify-between items-center shadow-md">
+    <header className="bg-[#3E3F5B] text-white px-6 py-3 flex justify-between items-center shadow-md">
       <Link to="/" className="text-2xl font-bold">
-        Moviee
+        CineCrate
       </Link>
 
       <nav className="space-x-4 text-lg">
@@ -36,7 +36,8 @@ const Header = () => {
 
       <div className="relative">
         {user ? (
-          <>
+          <div className="flex justify-center items-center gap-2">
+            <h2>Hii, {user.name}</h2>
             <img
               src={user.picture || "/default-avatar.png"}
               alt="profile"
@@ -44,7 +45,7 @@ const Header = () => {
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md z-50">
+              <div className="absolute right-0 mt-40 w-40 bg-white text-black rounded shadow-md z-50">
                 <div className="px-4 py-2 border-b text-sm">{user.name}</div>
                 <Link
                   to="/profile"
@@ -52,6 +53,13 @@ const Header = () => {
                   onClick={() => setDropdownOpen(false)}
                 >
                   Profile
+                </Link>
+                <Link
+                  to="/add"
+                  className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Add Movie
                 </Link>
                 <button
                   onClick={handleLogout}
@@ -61,7 +69,7 @@ const Header = () => {
                 </button>
               </div>
             )}
-          </>
+          </div>
         ) : (
           <Link
             to="/auth"

@@ -4,7 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const Authentication = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center">
       <div className="flex gap-10 items-center h-[200] w-2xl border-2 rounded-2xl p-3">
         <div>
           <img

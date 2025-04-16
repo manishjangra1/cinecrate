@@ -5,7 +5,7 @@ import Footer from "../Common/Footer";
 
 const UserLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#EFEFEF]">
       <Header />
       <main className="flex-grow p-4">
         <Outlet />

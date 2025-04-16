@@ -1,3 +1,4 @@
+import Movie from "../models/Movie.js";
 import Review from "../models/Review.js";
 
 export const getReviews = async (req, res) => {
@@ -27,4 +28,34 @@ export const likeReview = async (req, res) => {
 
   await review.save();
   res.json(review);
+};
+
+export const getUserReviews = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const reviews = await Review.find({ userId });
+
+    // Fetch movie info for each review
+    const movieIds = reviews.map((r) => r.movieId);
+    const movies = await Movie.find({ _id: { $in: movieIds } });
+
+    // Merge movie info with reviews
+    const reviewsWithMovie = reviews.map((review) => {
+      const movie = movies.find((m) => m._id.equals(review.movieId));
+      return {
+        ...review._doc,
+        movie: movie
+          ? {
+              _id: movie._id,
+              Title: movie.Title,
+              Poster: movie.Poster,
+            }
+          : null,
+      };
+    });
+
+    res.json(reviewsWithMovie);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch user reviews" });
+  }
 };
