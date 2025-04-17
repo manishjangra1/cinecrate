@@ -89,6 +89,7 @@ function MovieDetails() {
         movieId={id}
         userId={user._id}
         username={user.name}
+        userPic={user.picture}
         onAdd={handleAddReview}
       />
 

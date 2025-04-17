@@ -13,6 +13,7 @@ const reviewSchema = new mongoose.Schema(
       required: true,
     },
     username: String,
+    userPic: String,
     comment: String,
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },

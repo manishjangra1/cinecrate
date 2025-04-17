@@ -22,6 +22,10 @@ connectDB();
 //routes
 app.use(router);
 
+app.get("/", (req, res) => {
+  res.send("This is page");
+});
+
 //server
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);

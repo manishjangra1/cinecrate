@@ -4,12 +4,12 @@ function MovieCard({ movie }) {
   return (
     <Link
       to={`/movie/${movie._id}`}
-      className="bg-[#EFEFEF] shadow-md hover:shadow-lg rounded-2xl overflow-hidden border max-w-xs transition-transform hover:scale-105"
+      className="bg-stone-100 shadow border-stone-200 hover:shadow-lg rounded-2xl overflow-hidden border max-w-xs transition-transform hover:scale-102 mb-5"
     >
       <img
         src={movie.Poster}
         alt={movie.Title}
-        className="w-full h-72 object-cover"
+        className="w-full h-52 object-cover object-top"
       />
       <div className="p-4 space-y-1">
         <h2 className="text-lg font-semibold truncate">{movie.Title}</h2>

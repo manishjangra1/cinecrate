@@ -86,7 +86,7 @@ function UserProfile() {
         ) : (
           <button
             onClick={() => setEditMode(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-[#3E3F5B] hover:bg-[#3e3f2b] text-white px-4 py-2 rounded"
           >
             Edit Profile
           </button>
@@ -94,7 +94,7 @@ function UserProfile() {
 
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded mt-4"
+          className="bg-rose-500 hover:bg-red-800 text-white px-4 py-2 rounded mt-4 ml-2"
         >
           Logout
         </button>
