@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function MovieCard({ movie }) {
   return (
     <Link
-      to={`/movie/${movie._id}`}
+      to={localStorage.getItem("user") ? `/movie/${movie._id}` : `/auth`}
       className="bg-stone-100 shadow border-stone-200 hover:shadow-lg rounded-2xl overflow-hidden border max-w-xs transition-transform hover:scale-102 mb-5"
     >
       <img

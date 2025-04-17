@@ -57,51 +57,54 @@ function UserProfile() {
     return <div className="text-center py-10">Please log in first.</div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 space-y-10">
-      <div className="bg-white shadow-md rounded-xl p-6 text-center space-y-4">
+    <div className="max-w-5xl mx-auto px-4 py-10 space-y-10">
+      {/* Profile Section */}
+      <div className="bg-white shadow-md rounded-xl p-6 sm:p-8 text-center sm:text-left space-y-6 flex flex-col sm:gap-4 sm:flex-row sm:items-center">
         <img
           src={user.picture || "/default-avatar.png"}
           alt="User avatar"
-          className="w-24 h-24 mx-auto rounded-full border object-cover"
+          className="w-24 h-24 mx-auto sm:mx-0 rounded-full border object-cover"
         />
-        <h2 className="text-2xl font-bold">{user.name}</h2>
-        <p className="text-gray-600">{user.email}</p>
+        <div className="flex-1 space-y-2">
+          <h2 className="text-2xl font-bold">{user.name}</h2>
+          <p className="text-gray-600">{user.email}</p>
 
-        {editMode ? (
-          <div className="space-y-2">
-            <input
-              type="text"
-              placeholder="Enter new profile picture URL"
-              className="w-full px-3 py-2 border rounded"
-              value={profilePic}
-              onChange={(e) => setProfilePic(e.target.value)}
-            />
+          {editMode ? (
+            <div className="space-y-2">
+              <input
+                type="text"
+                placeholder="Enter new profile picture URL"
+                className="w-full px-3 py-2 border rounded"
+                value={profilePic}
+                onChange={(e) => setProfilePic(e.target.value)}
+              />
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded w-full sm:w-auto"
+                onClick={handleUpdateProfilePic}
+              >
+                Save Picture
+              </button>
+            </div>
+          ) : (
             <button
-              className="bg-green-500 text-white px-4 py-2 rounded"
-              onClick={handleUpdateProfilePic}
+              onClick={() => setEditMode(true)}
+              className="bg-[#3E3F5B] hover:bg-[#3e3f2b] text-white px-4 py-2 rounded w-full sm:w-auto"
             >
-              Save Picture
+              Edit Profile
             </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => setEditMode(true)}
-            className="bg-[#3E3F5B] hover:bg-[#3e3f2b] text-white px-4 py-2 rounded"
-          >
-            Edit Profile
-          </button>
-        )}
+          )}
 
-        <button
-          onClick={handleLogout}
-          className="bg-rose-500 hover:bg-red-800 text-white px-4 py-2 rounded mt-4 ml-2"
-        >
-          Logout
-        </button>
+          <button
+            onClick={handleLogout}
+            className="bg-rose-500 hover:bg-red-800 text-white px-4 py-2 rounded mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
-      {/* User Reviews */}
-      <div className="bg-white shadow-md rounded-xl p-6">
+      {/* Reviews Section */}
+      <div className="bg-white shadow-md rounded-xl p-6 sm:p-8">
         <h3 className="text-xl font-semibold mb-4">Your Reviews</h3>
         {userReviews.length === 0 ? (
           <p className="text-gray-500">You haven't reviewed any movies yet.</p>
@@ -111,20 +114,20 @@ function UserProfile() {
               <Link
                 to={`/movie/${review.movie._id}`}
                 key={review._id}
-                className="flex items-start gap-4 border-b pb-4"
+                className="flex flex-col sm:flex-row gap-4 border-b pb-4"
               >
                 {review.movie && (
                   <img
                     src={review.movie.Poster}
                     alt={review.movie.Title}
-                    className="w-16 h-24 object-cover rounded"
+                    className="w-full sm:w-20 h-32 object-cover rounded"
                   />
                 )}
                 <div>
                   <h4 className="text-md font-semibold">
                     {review.movie?.Title}
                   </h4>
-                  <p className="text-gray-600">{review.comment}</p>
+                  <p className="text-gray-600 mt-1">{review.comment}</p>
                   <p className="text-sm text-gray-400 mt-1">
                     Likes: {review.likes.length}
                   </p>

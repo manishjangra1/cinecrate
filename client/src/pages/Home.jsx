@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
 function Home() {
@@ -30,42 +30,29 @@ function Home() {
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
-      setSearchParams({ page: page.toString() }); // ✅ Ensure it's a string
-      window.scrollTo({ top: 0, behavior: "smooth" }); // optional
+      setSearchParams({ page: page.toString() });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Movies</h1>
+    <div className="p-4 max-w-7xl mx-auto">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
+        Movies
+      </h1>
 
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {movies.map((movie) => (
-          // <Link
-          //   to={`/movie/${movie._id}`}
-          //   key={movie._id}
-          //   className="mb-3 p-3 border rounded shadow w-52"
-          // >
-          //   <img
-          //     src={movie.Poster}
-          //     alt={movie.Title}
-          //     className="h-[300px] object-cover"
-          //   />
-          //   <h2 className="text-xl">{movie.Title}</h2>
-          //   <p className="hidden">{movie.Plot}</p>
-          //   <p>{movie.Genre}</p>
-          // </Link>
-
           <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex flex-wrap justify-center gap-2 mt-8">
         <button
           onClick={() => handlePageChange(pageParam - 1)}
           disabled={pageParam === 1}
-          className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition"
         >
           Prev
         </button>
@@ -74,10 +61,10 @@ function Home() {
           <button
             key={idx}
             onClick={() => handlePageChange(idx + 1)}
-            className={`px-3 py-1 border rounded ${
+            className={`px-3 py-1 border rounded transition text-sm sm:text-base ${
               pageParam === idx + 1
-                ? "bg-gray-300 font-bold"
-                : "hover:bg-gray-200"
+                ? "bg-gray-300 font-semibold"
+                : "hover:bg-gray-100"
             }`}
           >
             {idx + 1}
@@ -87,7 +74,7 @@ function Home() {
         <button
           onClick={() => handlePageChange(pageParam + 1)}
           disabled={pageParam === totalPages}
-          className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition"
         >
           Next
         </button>

@@ -50,12 +50,14 @@ function AddMovie() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto px-4 py-10">
       <ToastContainer />
-      <h1 className="text-3xl font-bold mb-6">🎬 Add New Movie</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
+        🎬 Add New Movie
+      </h1>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded-xl shadow"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white p-6 sm:p-8 rounded-xl shadow"
       >
         {/* Left Column */}
         <div className="space-y-4">
@@ -158,7 +160,7 @@ function AddMovie() {
         </div>
 
         {/* Plot Field Full Width */}
-        <div className="md:col-span-2">
+        <div className="sm:col-span-2">
           <textarea
             name="Plot"
             placeholder="Plot / Description"
@@ -169,10 +171,10 @@ function AddMovie() {
         </div>
 
         {/* Submit Button */}
-        <div className="md:col-span-2 flex justify-end">
+        <div className="sm:col-span-2 flex flex-col sm:flex-row justify-end gap-2">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full sm:w-auto"
           >
             Add Movie
           </button>

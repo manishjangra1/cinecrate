@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
 const Explore = () => {
@@ -43,22 +42,25 @@ const Explore = () => {
   }, [query, genre]);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Explore Movies</h1>
+    <div className="px-4 py-8 max-w-7xl mx-auto">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
+        Explore Movies
+      </h1>
 
-      <div className="flex gap-4 mb-4">
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <input
           type="text"
           placeholder="Search movies..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="border p-2 w-1/2 rounded"
+          className="border border-gray-300 p-2 rounded w-full sm:w-1/2 focus:outline-none focus:ring focus:border-blue-400 transition"
         />
 
         <select
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
-          className="border p-2 rounded"
+          className="border border-gray-300 p-2 rounded w-full sm:w-1/3 focus:outline-none focus:ring focus:border-blue-400 transition"
         >
           <option value="">Filter By Genre</option>
           {availableGenres.map((g, index) => (
@@ -69,25 +71,15 @@ const Explore = () => {
         </select>
       </div>
 
+      {/* Movies Grid */}
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        {movies.map((movie) => (
-          // <Link
-          //   to={`/movie/${movie._id}`}
-          //   key={movie._id}
-          //   className="border rounded shadow hover:shadow-lg transition duration-300"
-          // >
-          //   <img
-          //     src={movie.Poster}
-          //     alt={movie.Title}
-          //     className="h-64 w-full object-cover rounded-t"
-          //   />
-          //   <div className="p-2">
-          //     <h2 className="text-lg font-semibold">{movie.Title}</h2>
-          //     <p className="text-sm text-gray-600">{movie.Genre}</p>
-          //   </div>
-          // </Link>
-          <MovieCard key={movie._id} movie={movie} />
-        ))}
+        {movies.length > 0 ? (
+          movies.map((movie) => <MovieCard key={movie._id} movie={movie} />)
+        ) : (
+          <p className="col-span-full text-center text-gray-600">
+            No movies found.
+          </p>
+        )}
       </div>
     </div>
   );
